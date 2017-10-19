@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse
-from models import Report
 from temba.tests import TembaTest
+from .models import Report
 
 
 class ReportTest(TembaTest):
