@@ -5,7 +5,7 @@ set -x # Output commands run to see them in the Travis interface
 
 if [ "$TEST" == "lint" ]; then
     flake8
-    2to3 --fix=asserts --fix=import temba/ 2>&1 | grep "RefactoringTool: No files need to be modified."
+    2to3 --fix=asserts --fix=import temba/ 2>&1 #| grep "RefactoringTool: No files need to be modified."
 elif [ "$TEST" == "migrations" ]; then
     python manage.py makemigrations --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations.' && exit 1)
 elif [ "$TEST" == "build" ]; then
