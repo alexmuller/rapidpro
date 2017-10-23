@@ -70,6 +70,7 @@ coverage
 flake8
 flake8-deprecated
 flake8-print
+flake8-tidy-imports
 mock
 responses
 selenium

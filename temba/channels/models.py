@@ -7,7 +7,6 @@ import plivo
 import requests
 import six
 import time
-import urlparse
 
 from abc import ABCMeta, abstractmethod
 from enum import Enum
@@ -33,6 +32,7 @@ from django_redis import get_redis_connection
 from gcm.gcm import GCM, GCMNotRegisteredException
 from phonenumbers import NumberParseException
 from pyfcm import FCMNotification
+from six.moves.urllib.parse import parse_qs, urlparse
 from smartmin.models import SmartModel
 
 from temba.orgs.models import Org, CHATBASE_TYPE_AGENT, ACCOUNT_SID, ACCOUNT_TOKEN
@@ -1485,7 +1485,7 @@ class Channel(TembaModel):
                 event.status_code = response.status_code
                 event.response_body = response.text
 
-                response_qs = urlparse.parse_qs(response.text)
+                response_qs = parse_qs(response.text)
             except Exception:
                 failed = True
 
@@ -2168,7 +2168,7 @@ class ChannelLog(models.Model):
                                   request_time=request_time_ms)
 
     def get_url_host(self):
-        parsed = urlparse.urlparse(self.url)
+        parsed = urlparse(self.url)
         return '%s://%s%s' % (parsed.scheme, parsed.hostname, parsed.path)
 
     def log_group(self):
